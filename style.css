@@ -1,0 +1,380 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fff0f3, #fce1e8, #fff7f0);
+    font-family: 'Poppins', sans-serif;
+    color: #653747;
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 20px;
+    text-align: center;
+}
+
+.intro {
+    animation: fadeIn 1.2s ease;
+}
+
+.top-heart {
+    display: block;
+    font-size: 45px;
+    color: #c04d76;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 6vw, 48px);
+    color: #a63860;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    max-width: 450px;
+    line-height: 1.8;
+    font-size: 15px;
+    color: #805768;
+}
+
+.instruction {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #a45e78;
+    font-style: italic;
+}
+
+/* ENVELOPE */
+
+.envelope {
+    position: relative;
+    width: 300px;
+    height: 195px;
+    margin: 75px auto 0;
+    perspective: 1000px;
+    transition: transform 1s ease, opacity 0.8s ease;
+}
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #d87596;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.letter-preview {
+    position: absolute;
+    width: 260px;
+    height: 165px;
+    background: #fffaf2;
+    left: 20px;
+    top: 15px;
+    padding: 20px 12px;
+    border-radius: 5px;
+    z-index: 2;
+    transition: transform 1s ease;
+    box-shadow: 0 3px 10px rgba(100, 40, 60, 0.1);
+}
+
+.letter-preview h2 {
+    font-family: 'Playfair Display', serif;
+    color: #a63860;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.letter-preview p {
+    font-size: 11px;
+    line-height: 1.7;
+    color: #805768;
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 115px solid #bf587a;
+    transform-origin: top;
+    transition: transform 0.8s ease;
+    z-index: 4;
+}
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    background: #e88eaa;
+    clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);
+    z-index: 3;
+}
+
+.heart {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 32px;
+    z-index: 5;
+    transition: opacity 0.3s ease;
+}
+
+/* OPEN BUTTON */
+
+button {
+    margin-top: 45px;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 40px;
+    background: #b9416b;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 7px 20px rgba(185, 65, 107, 0.25);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #963453;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(185, 65, 107, 0.35);
+}
+
+/* OPENING ANIMATION */
+
+.container.opened .flap {
+    transform: rotateX(180deg);
+}
+
+.container.opened .letter-preview {
+    transform: translateY(-125px);
+}
+
+.container.opened .heart {
+    opacity: 0;
+}
+
+.container.opened .envelope {
+    transform: translateY(-40px);
+    opacity: 0;
+}
+
+.container.opened .intro,
+.container.opened #openBtn {
+    display: none;
+}
+
+/* FULL BIRTHDAY LETTER */
+
+.full-letter {
+    display: none;
+    width: 100%;
+    max-width: 750px;
+    margin: 20px auto;
+}
+
+.container.show-letter .full-letter {
+    display: block;
+    animation: letterReveal 1.2s ease forwards;
+}
+
+.letter-content {
+    background: rgba(255, 250, 245, 0.95);
+    padding: 55px 65px;
+    border: 1px solid #f3d5df;
+    border-radius: 12px;
+    box-shadow: 0 15px 50px rgba(125, 54, 80, 0.12);
+    text-align: left;
+    position: relative;
+}
+
+.letter-decoration {
+    display: block;
+    text-align: center;
+    font-size: 38px;
+    color: #bd5278;
+    margin-bottom: 15px;
+}
+
+.letter-date {
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #b65d7c;
+    margin-bottom: 35px;
+}
+
+.letter-content > h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: #a63860;
+    margin-bottom: 25px;
+}
+
+.letter-content > p:not(.letter-date) {
+    font-size: 14px;
+    line-height: 2;
+    color: #70505d;
+    margin-bottom: 20px;
+}
+
+.letter-content h3 {
+    font-family: 'Playfair Display', serif;
+    color: #a63860;
+    font-size: 23px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.signature {
+    border-top: 1px solid #efd0db;
+    padding-top: 25px;
+    text-align: right;
+    margin-top: 35px;
+}
+
+.signature p {
+    font-size: 13px;
+    color: #805768;
+}
+
+.signature h2 {
+    font-family: 'Playfair Display', serif;
+    color: #a63860;
+    font-size: 30px;
+    margin: 8px 0;
+}
+
+.signature .final-note {
+    font-style: italic;
+    color: #ad5575;
+}
+
+.closing {
+    text-align: center;
+    margin-top: 45px;
+    color: #b34e73;
+}
+
+.closing span {
+    font-size: 30px;
+}
+
+.closing p {
+    font-size: 12px;
+    margin-top: 8px;
+    letter-spacing: 1px;
+}
+
+/* FLOATING HEARTS */
+
+.floating-heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 10;
+    animation: floatUp 5s linear forwards;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes letterReveal {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) rotate(35deg);
+    }
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 25px 15px;
+    }
+
+    .envelope {
+        width: 280px;
+        height: 180px;
+    }
+
+    .flap {
+        border-left-width: 140px;
+        border-right-width: 140px;
+        border-top-width: 105px;
+    }
+
+    .letter-preview {
+        width: 240px;
+        left: 20px;
+    }
+
+    .letter-content {
+        padding: 35px 23px;
+    }
+
+    .letter-content > h2 {
+        font-size: 27px;
+    }
+
+    .letter-content > p:not(.letter-date) {
+        font-size: 13px;
+    }
+
+    .letter-content h3 {
+        font-size: 20px;
+    }
+}
